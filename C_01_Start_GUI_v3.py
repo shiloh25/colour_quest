@@ -1,6 +1,7 @@
 from tkinter import *
 from functools import partial # To prevent unwanted windows
 
+
 class StartGame:
     """
     Initial Game interface (asks users how many rounds they would like to play)
@@ -91,6 +92,7 @@ class StartGame:
                 self.num_rounds_entry.config(bg="#F4CCCC")
                 self.num_rounds_entry.delete(0, END)
 
+
 class Play:
     """
     Interface for playing the Colour Quest Game
@@ -115,6 +117,7 @@ class Play:
         # game / allow new game to start
         root.deiconify()
         self.play_box.destroy()
+
 
 # main routine
 if __name__ == "__main__":
