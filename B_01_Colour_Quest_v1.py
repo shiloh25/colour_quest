@@ -43,8 +43,9 @@ def get_round_colours():
 
     median = (int_scores[1] + int_scores[2]) / 2
     median = round_ans(median)
+    highest = int_scores[-1]
 
-    return round_colours, median
+    return round_colours, median, highest
 
 
 def round_ans(val):
@@ -173,6 +174,7 @@ class Play:
         self.round_colour_list = []
         self.all_scores_list = []
         self.all_medians_list = []
+        self.all_high_score_list = []
 
         self.play_box = Toplevel()
 
@@ -262,10 +264,11 @@ class Play:
         rounds_wanted = self.rounds_wanted.get()
 
         # get round colours and median score
-        self.round_colour_list, median = get_round_colours()
+        self.round_colour_list, median, highest = get_round_colours()
 
         # set target score as median (for later comparison)
         self.target_score.set(median)
+        self.all_high_score_list.append(highest)
 
         # update heading and score to beat labels. 'Hide' results label
         self.heading_label.config(text=f"Round {rounds_played} of {rounds_wanted}")
@@ -279,7 +282,6 @@ class Play:
                         text=self.round_colour_list[count][0], state=NORMAL)
 
         self.next_button.config(state=DISABLED)
-
 
     def round_results(self, user_choice):
         """
@@ -307,6 +309,11 @@ class Play:
 
         self.results_label.config(text=result_text, bg=result_bg)
 
+        # printing
+        print("all scores", self.all_scores_list)
+        print("all medians:", self.all_medians_list)
+        print("highest scores:", self.all_high_score_list)
+
         # enable stats and next buttons, disable colour buttons
         self.next_button.config(state=NORMAL)
         self.stats_button.config(state=NORMAL)
@@ -321,7 +328,6 @@ class Play:
 
         for item in self.colour_button_ref:
             item.config(state=DISABLED)
-
 
     def close_play(self):
         # reshow root (ie: close rounds) and end current
