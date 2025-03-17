@@ -245,11 +245,11 @@ class Play:
 
         # retrieve next, stats and end button so that they can be configured
         self.next_button = control_ref_list[0]
-        self.hints_button = control_ref_list[1]
-        self.stats_button = control_ref_list[2]
+        self.to_help_button = control_ref_list[1]
+        self.to_stats_button = control_ref_list[2]
         self.end_game_button = control_ref_list[3]
 
-        self.stats_button.config(state=DISABLED)
+        self.to_stats_button.config(state=DISABLED)
 
         # once interface has been created, invoke new round function for first round
         self.new_round()
@@ -294,7 +294,7 @@ class Play:
         """
 
         # enable stats button after at least one round has been played
-        self.stats_button.config(state=NORMAL)
+        self.to_stats_button.config(state=NORMAL)
 
         # get user score and colour based on button press...
         score = int(self.round_colour_list[user_choice][1])
@@ -327,7 +327,7 @@ class Play:
 
         # enable stats and next buttons, disable colour buttons
         self.next_button.config(state=NORMAL)
-        self.stats_button.config(state=NORMAL)
+        self.to_stats_button.config(state=NORMAL)
 
         # check to see if game is over
         rounds_played = self.rounds_played.get()
